@@ -56,6 +56,11 @@ Add additional notes about how to deploy this on a live system
 mvn spring-boot:run
 ```
 
+## Implementation -- Good Practises
+* All dates are stored in GMT, and the resource server MUST only manage dates in UTC over input and output operations.
+* API REST must be accomplished with HATEOAS
+* Source must be written in english and must contain comments and javadoc.
+
 ## Authors
 
 See also the list of [contributors](https://github.com/orgs/accentation/people) who participated in this project.
