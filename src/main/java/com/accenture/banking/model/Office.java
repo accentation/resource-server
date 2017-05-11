@@ -3,8 +3,6 @@ package com.accenture.banking.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +15,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "office")
 public class Office implements java.io.Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private String address;
