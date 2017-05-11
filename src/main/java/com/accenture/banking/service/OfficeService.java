@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2016 the original author or authors.
+ * Copyright 2012-2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,19 @@
 
 package com.accenture.banking.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-@Component("cityService")
-//ONLY FOR TRANSACTIONAL DB OPERATIONS
-//@Transactional
-class SampleServiceImpl implements SampleService {
+import com.accenture.banking.model.Office;
 
-	@Override
-	public String getHelloWorld() {
-		
-		return "Hello World!";
-	}
-
+public interface OfficeService {
 	
+	Office getOfficeById(Long id);
+
+//	Page<Office> findOffices(OfficeSearchCriteria criteria, Pageable pageable);
+//
+//	Office getOfficeByAddress(String address);
+	
+
+
 }
