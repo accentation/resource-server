@@ -1,0 +1,45 @@
+package com.accenture.banking.resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.accenture.banking.resource.builder.EntityToDtoBuilder;
+
+/**
+ * Restful class controller for Accounts resources.
+ * 
+ * @author r.lazcano.pello
+ * 
+ */
+
+@RestController
+@RequestMapping("/offices/accounts")
+public class AccountController {
+	@Autowired
+	private EntityToDtoBuilder dtoBuilder;
+
+	@Autowired
+	private AccountService accountService;
+
+	/**
+	 * This method returns an Account by Id given
+	 * 
+	 * @return AccountDto
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AccountDto> getAccountById(@PathVariable("id") Long id) {
+		Account account = this.accountService.getAccountById(id);
+		if (account == null) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+		AccountDto dto = dtoBuilder.buildAccountDto(account);
+		return new ResponseEntity<>(dto, HttpStatus.OK);
+	}
+
+}
