@@ -24,6 +24,8 @@ import com.accenture.banking.model.Office;
 public interface OfficeService {
 	
 	Office getOfficeById(Long id);
+	
+	Page<Office> listAllByPage(Pageable pageable);
 
 //	Page<Office> findOffices(OfficeSearchCriteria criteria, Pageable pageable);
 //
