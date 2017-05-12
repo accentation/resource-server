@@ -26,7 +26,7 @@ public class Client implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private long id;
 	private String name;
 	private String surname;
 	private Date createdDatetime;
@@ -55,11 +55,11 @@ public class Client implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
