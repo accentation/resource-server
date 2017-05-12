@@ -29,9 +29,29 @@ public class ClientController {
 	 * 
 	 * @return ClientDto
 	 */
-	@RequestMapping(value = "/{clientId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "id/{clientId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ClientDto> getOfficeById(@PathVariable("clientId") long clientId) {
 		Client client = this.clientService.getClientById(clientId);
+		if (client == null) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+		ClientDto dto = dtoBuilder.buildClientDto(client);
+		return new ResponseEntity<>(dto, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "name/{clientName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ClientDto> getOfficeByName(@PathVariable("clientName") String name) {
+		Client client = this.clientService.getClientByName(name);
+		if (client == null) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+		ClientDto dto = dtoBuilder.buildClientDto(client);
+		return new ResponseEntity<>(dto, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/{clientName}/{clientSurname}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ClientDto> getOfficeByNameSurname(@PathVariable("clientName") String name, @PathVariable("clientSurname") String surname) {
+		Client client = this.clientService.getClientByNameSurname(name, surname);
 		if (client == null) {
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
 		}

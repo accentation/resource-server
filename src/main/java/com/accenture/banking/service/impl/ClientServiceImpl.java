@@ -28,4 +28,15 @@ public class ClientServiceImpl implements ClientService {
 		return this.clientRepository.findOne(id);
 	}
 
+
+	@Override
+	public Client getClientByName(String name) {
+		return this.clientRepository.findByNameAllIgnoringCase(name);
+	}
+
+	@Override
+	public Client getClientByNameSurname(String name, String surname) {
+		return this.clientRepository.findByNameAndSurname(name, surname);
+	}
+
 }
