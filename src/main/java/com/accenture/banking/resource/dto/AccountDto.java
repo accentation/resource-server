@@ -1,6 +1,9 @@
 package com.accenture.banking.resource.dto;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import com.accenture.banking.model.Office;
 
 /**
  * DTO class to build Account JSON REST response
@@ -9,26 +12,31 @@ import java.util.Date;
  *
  */
 public class AccountDto {
-	private long id;
-	private long office_id;
+	private Long id;
+	private Office office;
 	private String iban;
-	private Date createdDateTime;
-	private Date deletedDateTime;
+	private Date createdDatetime;
+	private Date deletedDatetime;
+	private long balance;
 
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public long getOffice_id() {
-		return office_id;
+	public Office getOffice() {
+		return office;
 	}
 
-	public void setOffice_id(long office_id) {
-		this.office_id = office_id;
+	public void setOffice(Office office) {
+
+		this.office = new Office();
+		this.office.setAddress(office.getAddress());
+		this.office.setId(office.getId());
+		this.office.setPhone(office.getPhone());
 	}
 
 	public String getIban() {
@@ -39,20 +47,28 @@ public class AccountDto {
 		this.iban = iban;
 	}
 
-	public Date getCreatedDateTime() {
-		return createdDateTime;
+	public Date getCreatedDatetime() {
+		return createdDatetime;
 	}
 
-	public void setCreatedDateTime(Date createdDateTime) {
-		this.createdDateTime = createdDateTime;
+	public void setCreatedDatetime(Date createdDatetime) {
+		this.createdDatetime = createdDatetime;
 	}
 
-	public Date getDeletedDateTime() {
-		return deletedDateTime;
+	public Date getDeletedDatetime() {
+		return deletedDatetime;
 	}
 
-	public void setDeletedDateTime(Date deletedDateTime) {
-		this.deletedDateTime = deletedDateTime;
+	public void setDeletedDatetime(Date deletedDatetime) {
+		this.deletedDatetime = deletedDatetime;
+	}
+
+	public long getBalance() {
+		return balance;
+	}
+
+	public void setBalance(long balance) {
+		this.balance = balance;
 	}
 
 }
