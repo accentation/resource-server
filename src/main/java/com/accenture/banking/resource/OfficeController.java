@@ -16,7 +16,11 @@
 
 package com.accenture.banking.resource;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +54,7 @@ public class OfficeController {
 	 * This method returns a Office by Id given
 	 * 
 	 * @return OfficeDto
-	 */
+	 */		
 	@RequestMapping(value = "/{officeId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<OfficeDto> getOfficeById(@PathVariable("officeId") Long officeId) {
 		Office office = this.officeService.getOfficeById(officeId);
@@ -60,5 +64,17 @@ public class OfficeController {
 		OfficeDto dto = dtoBuilder.buildOfficeDto(office);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
-
+	
+	
+	/**
+	 * This method returns all paged Offices
+	 * 
+	 * @return Page<Office>
+	 */	
+	// http://localhost:8081/offices/?page=2&size=1&sort=id
+	@RequestMapping(value="/",method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	Page<Office> list( Pageable pageable){
+		Page<Office> offices = officeService.listAllByPage(pageable);
+		return offices;
+	} 
 }

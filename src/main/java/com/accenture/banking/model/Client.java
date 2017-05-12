@@ -26,12 +26,14 @@ public class Client implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private Long id;
 	private String name;
 	private String surname;
+	private String dni;
 	private Date createdDatetime;
 	private Date deletedDatetime;
 	private Set<AccountClient> accountClients = new HashSet<AccountClient>(0);
+	
 
 	public Client() {
 	}
@@ -55,11 +57,11 @@ public class Client implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -79,6 +81,15 @@ public class Client implements java.io.Serializable {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
+	}
+	
+	@Column(name = "dni", nullable = false, length = 45)
+	public String getDni() {
+		return this.dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
