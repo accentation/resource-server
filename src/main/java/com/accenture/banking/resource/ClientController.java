@@ -15,7 +15,7 @@ import com.accenture.banking.resource.dto.ClientDto;
 import com.accenture.banking.service.ClientService;
 
 @RestController
-@RequestMapping("/offices/clients")
+@RequestMapping("/clients")
 public class ClientController {
 
 	@Autowired
