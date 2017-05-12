@@ -1,6 +1,8 @@
 package com.accenture.banking.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,21 @@ public class ClientController {
 
 	@Autowired
 	private ClientService clientService;
+	
+
+	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<ClientDto> getClients() {
+//		Client client = this.clientService.getClients();
+//		if (client == null) {
+//			return new ResponseEntity(HttpStatus.NOT_FOUND);
+//		}
+//		ClientDto dto = dtoBuilder.buildClientDto(client);
+//		return new ResponseEntity<>(dto, HttpStatus.OK);
+//	}
+	Page<Client> list( Pageable pageable){
+		Page<Client> clients = clientService.listAllByPage(pageable);
+		return clients;
+	} 
 
 	/**
 	 * This method returns a Client by Id given
@@ -30,7 +47,7 @@ public class ClientController {
 	 * @return ClientDto
 	 */
 	@RequestMapping(value = "{clientId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ClientDto> getOfficeById(@PathVariable("clientId") Long clientId) {
+	public ResponseEntity<ClientDto> getClientById(@PathVariable("clientId") Long clientId) {
 		Client client = this.clientService.getClientById(clientId);
 		if (client == null) {
 			return new ResponseEntity(HttpStatus.NOT_FOUND);

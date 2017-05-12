@@ -1,6 +1,8 @@
 package com.accenture.banking.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,10 @@ public class ClientServiceImpl implements ClientService {
 	@Autowired
 	private ClientRepository clientRepository;
 
+	@Override
+	public	Page<Client> listAllByPage(Pageable pageable) {
+		return clientRepository.findAll(pageable);
+	}
 	
 	/**
 	 * Return client by Id
