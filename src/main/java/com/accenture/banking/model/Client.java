@@ -29,9 +29,11 @@ public class Client implements java.io.Serializable {
 	private Integer id;
 	private String name;
 	private String surname;
+	private String dni;
 	private Date createdDatetime;
 	private Date deletedDatetime;
 	private Set<AccountClient> accountClients = new HashSet<AccountClient>(0);
+	
 
 	public Client() {
 	}
@@ -79,6 +81,15 @@ public class Client implements java.io.Serializable {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
+	}
+	
+	@Column(name = "dni", nullable = false, length = 45)
+	public String getDni() {
+		return this.dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
