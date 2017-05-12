@@ -24,7 +24,7 @@ public class ClientServiceImpl implements ClientService {
 	 * @return Client
 	 */
 	@Override
-	public Client getClientById(long id) {
+	public Client getClientById(Long id) {
 		return this.clientRepository.findOne(id);
 	}
 

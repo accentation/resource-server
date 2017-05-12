@@ -4,24 +4,25 @@ import java.util.Date;
 
 public class ClientDto {
 
-	private long id;
+	private Long id;
 	private String name;
 	private String surname;
+	private String dni;
 	private Date created_datetime;
 	private Date deleted_datetime;
-
 
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -30,6 +31,21 @@ public class ClientDto {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * @return the dni
+	 */
+	public String getDni() {
+		return dni;
+	}
+
+	/**
+	 * @param dni
+	 *            the dni to set
+	 */
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 	/**

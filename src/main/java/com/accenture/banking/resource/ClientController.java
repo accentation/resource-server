@@ -29,8 +29,8 @@ public class ClientController {
 	 * 
 	 * @return ClientDto
 	 */
-	@RequestMapping(value = "id/{clientId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ClientDto> getOfficeById(@PathVariable("clientId") long clientId) {
+	@RequestMapping(value = "{clientId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ClientDto> getOfficeById(@PathVariable("clientId") Long clientId) {
 		Client client = this.clientService.getClientById(clientId);
 		if (client == null) {
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -38,7 +38,7 @@ public class ClientController {
 		ClientDto dto = dtoBuilder.buildClientDto(client);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
-
+/*
 	@RequestMapping(value = "name/{clientName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ClientDto> getOfficeByName(@PathVariable("clientName") String name) {
 		Client client = this.clientService.getClientByName(name);
@@ -58,5 +58,6 @@ public class ClientController {
 		ClientDto dto = dtoBuilder.buildClientDto(client);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
+	*/
 
 }
