@@ -33,7 +33,7 @@ import com.accenture.banking.service.OfficeService;
  * @author j.garcia.sanchez
  *
  */
-@Service ("officeService")
+@Service("officeService")
 @Transactional
 class OfficeServiceImpl implements OfficeService {
 
@@ -59,11 +59,11 @@ class OfficeServiceImpl implements OfficeService {
 	 * Return paged office
 	 * 
 	 * @param pageable:
-	 *            
+	 * 
 	 * @return Page<Office>
 	 */
 	@Override
-	public	Page<Office> listAllByPage(Pageable pageable) {
+	public Page<Office> listAllByPage(Pageable pageable) {
 		return officeRepository.findAll(pageable);
 	}
 	
