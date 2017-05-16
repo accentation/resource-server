@@ -26,6 +26,22 @@ public class TestApplicationBuilder {
 		String response = restTemplate.getForObject("http://localhost:8082/offices/1", String.class);
 		
 		assertThat(response, containsString("678678678"));		
+	}
+
+	@Test
+	public void testClientById() throws Exception {
+
+		String response = restTemplate.getForObject("http://localhost:8082/clients/1", String.class);
+		
+		assertThat(response, containsString("Zinedine"));		
+	}	 
+
+	@Test
+	public void testClients() throws Exception {
+
+		String response = restTemplate.getForObject("http://localhost:8082/clients/", String.class);
+		
+		assertThat(response, containsString("Ladrón Gonzalez"));		
 	}	    
 	  	
 	@Test
