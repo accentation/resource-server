@@ -10,18 +10,25 @@ import com.accenture.banking.model.Client;
 import com.accenture.banking.respository.ClientRepository;
 import com.accenture.banking.service.ClientService;
 
-@Service ("clientService")
+@Service("clientService")
 @Transactional
 public class ClientServiceImpl implements ClientService {
-	
+
 	@Autowired
 	private ClientRepository clientRepository;
 
+	/**
+	 * Return paged client
+	 * 
+	 * @param pageable:
+	 * 
+	 * @return Page<Client>
+	 */
 	@Override
-	public	Page<Client> listAllByPage(Pageable pageable) {
+	public Page<Client> listAllByPage(Pageable pageable) {
 		return clientRepository.findAll(pageable);
 	}
-	
+
 	/**
 	 * Return client by Id
 	 * 
@@ -33,7 +40,6 @@ public class ClientServiceImpl implements ClientService {
 	public Client getClientById(Long id) {
 		return this.clientRepository.findOne(id);
 	}
-
 
 	@Override
 	public Client getClientByName(String name) {

@@ -3,13 +3,10 @@ package com.accenture.banking.resource.builder;
 import org.springframework.stereotype.Component;
 
 import com.accenture.banking.model.Account;
+import com.accenture.banking.model.Client;
 import com.accenture.banking.model.Office;
 import com.accenture.banking.resource.dto.AccountDto;
-
-import com.accenture.banking.model.Client;
-
 import com.accenture.banking.resource.dto.ClientDto;
-
 import com.accenture.banking.resource.dto.OfficeDto;
 
 @Component("entityToDtoBuilder")

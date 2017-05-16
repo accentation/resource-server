@@ -32,7 +32,7 @@ public class Client implements java.io.Serializable {
 	private String dni;
 	private Date createdDatetime;
 	private Date deletedDatetime;
-	private Set<AccountClient> accountClients = new HashSet<AccountClient>(0);
+//	private Set<AccountClient> accountClients = new HashSet<AccountClient>(0);
 	
 
 	public Client() {
@@ -50,7 +50,7 @@ public class Client implements java.io.Serializable {
 		this.surname = surname;
 		this.createdDatetime = createdDatetime;
 		this.deletedDatetime = deletedDatetime;
-		this.accountClients = accountClients;
+//		this.accountClients = accountClients;
 	}
 
 	@Id
@@ -112,13 +112,13 @@ public class Client implements java.io.Serializable {
 		this.deletedDatetime = deletedDatetime;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
-	public Set<AccountClient> getAccountClients() {
-		return this.accountClients;
-	}
-
-	public void setAccountClients(Set<AccountClient> accountClients) {
-		this.accountClients = accountClients;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+//	public Set<AccountClient> getAccountClients() {
+//		return this.accountClients;
+//	}
+//
+//	public void setAccountClients(Set<AccountClient> accountClients) {
+//		this.accountClients = accountClients;
+//	}
 
 }

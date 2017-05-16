@@ -1,6 +1,14 @@
 package com.accenture.banking.resource.dto;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import com.accenture.banking.model.Account;
+import com.accenture.banking.model.AccountClient;
+import com.accenture.banking.model.AccountClientId;
+import com.accenture.banking.model.Client;
 
 public class ClientDto {
 
