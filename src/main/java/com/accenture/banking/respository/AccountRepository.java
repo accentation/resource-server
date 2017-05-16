@@ -12,4 +12,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
 	Account findByIbanAllIgnoringCase(String iban);
 //	Account findByIdAllIgnoringCase(long id);
+
+	Page<Account> findByOfficeId(long officeId, Pageable pageable);
 }
