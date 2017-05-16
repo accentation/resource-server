@@ -72,6 +72,7 @@ public class OfficeController {
 	// http://localhost:8081/offices/?page=2&size=1&sort=id
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	Page<OfficeDto> list(Pageable pageable) {
+
 		Page<Office> offices = officeService.listAllByPage(pageable);
 		Page<OfficeDto> dtoPage = offices.map(new Converter<Office, OfficeDto>() {
 			public OfficeDto convert(Office office) {
