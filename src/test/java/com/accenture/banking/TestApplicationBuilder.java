@@ -14,9 +14,9 @@ import static org.junit.Assert.*;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment =WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 public class TestApplicationBuilder {
-	
+
 	@Autowired
 	TestRestTemplate restTemplate;
 
@@ -24,24 +24,42 @@ public class TestApplicationBuilder {
 	public void testOfficeById() throws Exception {
 
 		String response = restTemplate.getForObject("http://localhost:8082/offices/1", String.class);
-		
-		assertThat(response, containsString("678678678"));		
+
+		assertThat(response, containsString("678678678"));
 	}
+
 	@Test
 	public void testAccountById() throws Exception {
 
 		String response = restTemplate.getForObject("http://localhost:8082/offices/1/accounts/1", String.class);
-		
-		assertThat(response, containsString("calle Alcala 208 Madrid Spain"));		
+
+		assertThat(response, containsString("calle Alcala 208 Madrid Spain"));
 	}
+
 	@Test
 	public void testAccounts() throws Exception {
 
 		String response = restTemplate.getForObject("http://localhost:8082/offices/1/accounts/", String.class);
-		
-		assertThat(response, containsString("calle Alcala 208 Madrid Spain"));		
+
+		assertThat(response, containsString("calle Alcala 208 Madrid Spain"));
 	}
-	  	
+
+	@Test
+	public void testClientById() throws Exception {
+
+		String response = restTemplate.getForObject("http://localhost:8082/clients/1", String.class);
+
+		assertThat(response, containsString("Zinedine"));
+	}
+
+	@Test
+	public void testClients() throws Exception {
+
+		String response = restTemplate.getForObject("http://localhost:8082/clients/", String.class);
+
+		assertThat(response, containsString("Ladrón Gonzalez"));
+	}
+
 	@Test
 	public void contextLoads() {
 	}
