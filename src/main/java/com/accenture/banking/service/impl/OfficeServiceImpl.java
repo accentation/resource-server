@@ -17,6 +17,8 @@
 package com.accenture.banking.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,4 +54,18 @@ class OfficeServiceImpl implements OfficeService {
 		return this.officeRepository.findOne(id);
 	}
 
+
+	/**
+	 * Return paged office
+	 * 
+	 * @param pageable:
+	 *            
+	 * @return Page<Office>
+	 */
+	@Override
+	public	Page<Office> listAllByPage(Pageable pageable) {
+		return officeRepository.findAll(pageable);
+	}
+	
+	
 }
