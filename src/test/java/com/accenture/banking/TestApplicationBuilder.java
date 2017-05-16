@@ -26,7 +26,21 @@ public class TestApplicationBuilder {
 		String response = restTemplate.getForObject("http://localhost:8082/offices/1", String.class);
 		
 		assertThat(response, containsString("678678678"));		
-	}	    
+	}
+	@Test
+	public void testAccountById() throws Exception {
+
+		String response = restTemplate.getForObject("http://localhost:8082/offices/1/accounts/1", String.class);
+		
+		assertThat(response, containsString("calle Alcala 208 Madrid Spain"));		
+	}
+	@Test
+	public void testAccounts() throws Exception {
+
+		String response = restTemplate.getForObject("http://localhost:8082/offices/1/accounts/", String.class);
+		
+		assertThat(response, containsString("calle Alcala 208 Madrid Spain"));		
+	}
 	  	
 	@Test
 	public void contextLoads() {
