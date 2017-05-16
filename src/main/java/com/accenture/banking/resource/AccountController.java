@@ -1,6 +1,9 @@
 package com.accenture.banking.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +25,7 @@ import com.accenture.banking.service.AccountService;
  */
 
 @RestController
-@RequestMapping("offices/accounts")
+@RequestMapping("offices/{officeId}/accounts")
 public class AccountController {
 	@Autowired
 	private EntityToDtoBuilder dtoBuilder;
@@ -31,34 +34,33 @@ public class AccountController {
 	private AccountService accountService;
 
 	/**
-	 * This method returns an Account by Iban given
+	 * This method returns an Account by Id given
 	 * 
 	 * @return AccountDto
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<AccountDto> getAccountById(@PathVariable("id") Long id) {
+	public ResponseEntity<AccountDto> getAccountById(@PathVariable("id") Long id,
+			@PathVariable("officeId") Long officeId) {
 
-		Account account = this.accountService.getAccountById(id);
-		System.out.println(account);
+		Account account = this.accountService.getAccountById(officeId, id);
 		if (account == null) {
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
 		}
 		AccountDto dto = dtoBuilder.buildAccountDto(account);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
-	// @RequestMapping(value = "/{iban}", method = RequestMethod.GET, produces =
-	// MediaType.APPLICATION_JSON_VALUE)
-	// public ResponseEntity<AccountDto> getAccountById(@PathVariable("iban")
-	// String iban) {
-	// Account account = this.accountService.getAccountByIban(iban);
-	// if (account == null) {
-	// return new ResponseEntity(HttpStatus.NOT_FOUND);
-	// }
-	//
-	// System.out.println("===================");
-	//
-	// AccountDto dto = dtoBuilder.buildAccountDto(account);
-	// return new ResponseEntity<>(dto, HttpStatus.OK);
-	// }
+
+	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	Page<AccountDto> list(Pageable pageable) {
+		Page<Account> accounts = accountService.listAllByPage(pageable);
+		Page<AccountDto> dtoPage = accounts.map(new Converter<Account, AccountDto>() {
+			public AccountDto convert(Account account) {
+
+				AccountDto dto = dtoBuilder.buildAccountDto(account);
+				return dto;
+			}
+		});
+		return dtoPage;
+	}
 
 }

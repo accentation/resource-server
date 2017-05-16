@@ -23,7 +23,7 @@ public class TestApplicationBuilder {
 	@Test
 	public void testOfficeById() throws Exception {
 
-		String response = restTemplate.getForObject("http://localhost:8081/offices/1", String.class);
+		String response = restTemplate.getForObject("http://localhost:8082/offices/1", String.class);
 		
 		assertThat(response, containsString("678678678"));		
 	}	    
