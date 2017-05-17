@@ -60,6 +60,15 @@ public class TestApplicationBuilder {
 		assertThat(response, containsString("Ladrón Gonzalez"));
 	}
 
+
+	@Test
+	public void testClientsByClientId() throws Exception {
+
+		String response = restTemplate.getForObject("http://localhost:8082/clients/3/accounts", String.class);
+
+		assertThat(response, containsString("ES91 2100 0418 0987 1205 1167"));
+	}
+
 	@Test
 	public void contextLoads() {
 	}

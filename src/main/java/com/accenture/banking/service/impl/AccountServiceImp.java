@@ -48,9 +48,14 @@ public class AccountServiceImp implements AccountService {
 	}
 
 	@Override
-	public Page<Account> listAllByOfficeId(long officeId,Pageable pageable) {
+	public Page<Account> listAllByOfficeId(long officeId, Pageable pageable) {
 		return accountRepository.findByOfficeId(officeId, pageable);
-		//Page<User> findByOfficeId(long officeId, Pageable pageable);
+		// Page<User> findByOfficeId(long officeId, Pageable pageable);
+	}
+
+	@Override
+	public Page<Account> listAllByClientId(long clientId,Pageable pageable) {
+		return accountRepository.findByClientId(clientId, pageable);
 	}
 
 }

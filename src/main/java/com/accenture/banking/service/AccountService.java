@@ -13,6 +13,8 @@ public interface AccountService {
 	Account getAccountById(Long officeId,Long id);
 //	Page <Account> findByOfficeId(long officeId, Pageable pageable);
 	Page<Account> listAllByOfficeId(long officeId, Pageable pageable);
+//	Page<Account> listAllByClientId(long clientId, Pageable pageable);
+	Page<Account> listAllByClientId(long clientId,Pageable pageable);
 	
 
 }
