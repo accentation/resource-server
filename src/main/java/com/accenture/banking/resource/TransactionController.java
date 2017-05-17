@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.banking.model.Account;
@@ -33,8 +34,10 @@ public class TransactionController {
 	private EntityToDtoBuilder dtoBuilder;	
 	
 	@RequestMapping(value="/",method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	ResponseEntity listAll(@PathVariable("officeId") Long officeId, @PathVariable("accountId") Long accountId, Pageable pageable){
-		Page<Transaction> transaction = transactionService.findAll(officeId, accountId, pageable);		
+	ResponseEntity listAll(@PathVariable("officeId") Long officeId, @PathVariable("accountId") Long accountId, @RequestParam(value="description", required=false) String description, @RequestParam(value="amountH",required=false) Long amountH, @RequestParam(value="amountL",required=false) Long amountL,  Pageable pageable){
+		Page<Transaction> transaction = transactionService.findAll(description,  amountH,  amountL,officeId, accountId, pageable);	
+		
+		
 		Page<TransactionDto> dtoPage = transaction.map(new Converter<Transaction, TransactionDto>() {
 		    public TransactionDto convert(Transaction transaction) {
 		    	TransactionDto 	dto = dtoBuilder.buildOfficeDto(transaction);
@@ -44,15 +47,11 @@ public class TransactionController {
 		return new ResponseEntity<>(dtoPage, HttpStatus.OK);
 	} 
 	
+	
 	@RequestMapping(value="/avg",method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	ResponseEntity transactionAvg(@PathVariable("officeId") Long officeId, @PathVariable("accountId") Long accountId, Pageable pageable){
-		Double transaction = transactionService.findAvg(officeId, accountId);		
-//		Page<TransactionDto> dtoPage = transaction.map(new Converter<Transaction, TransactionDto>() {
-//		    public TransactionDto convert(Transaction transaction) {
-//		    	TransactionDto 	dto = dtoBuilder.buildOfficeDto(transaction);
-//		        return dto;
-//		    }		
-//		});			
+	ResponseEntity transactionAvg(@PathVariable("officeId") Long officeId, @PathVariable("accountId") Long accountId, @RequestParam(value="description", required=false) String description, @RequestParam(value="amountH",required=false) Long amountH, @RequestParam(value="amountL",required=false) Long amountL, Pageable pageable){
+		Double transaction = transactionService.findAvg(description, amountH, amountL, officeId, accountId);		
+		
 		return new ResponseEntity<>(transaction, HttpStatus.OK);
 	} 
 	

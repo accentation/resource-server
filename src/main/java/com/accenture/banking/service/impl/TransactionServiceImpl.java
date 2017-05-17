@@ -3,6 +3,7 @@ package com.accenture.banking.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,13 +21,14 @@ public class TransactionServiceImpl implements TransactionService{
 	private TransactionRepository transactionRepository;
 	
 	@Override
-	public Page<Transaction> findAll(Long officeId, Long accountId, Pageable pageable) {
-		// TODO Auto-generated method stub		
-		return transactionRepository.findAll(officeId, accountId,pageable);		
+	public Page<Transaction> findAll(String description, Long amountH, Long amountL,  Long officeId, Long accountId, Pageable pageable) {
+				
+		
+		return transactionRepository.findAll(description, amountH,amountL,  officeId,  accountId, pageable);		
 	}
 
 	@Override
-	public Double findAvg(Long officeId, Long accountId) {
-		return transactionRepository.findAvg(officeId, accountId);	
+	public Double findAvg(String description, Long amountH, Long amountL, Long officeId, Long accountId) {
+		return transactionRepository.findAvg(description, amountH, amountL, officeId, accountId);	
 	}
 }

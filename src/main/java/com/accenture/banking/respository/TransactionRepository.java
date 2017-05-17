@@ -11,12 +11,15 @@ import com.accenture.banking.model.Account;
 import com.accenture.banking.model.Transaction;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-	@Query("SELECT p FROM Transaction p WHERE(p.account.id = :idAccount ) AND (p.account.office.id = :idOffice))")
-	Page<Transaction> findAll(@Param("idOffice") Long officeId,@Param("idAccount") Long accountId, Pageable pageable);
+	//@Query("SELECT p FROM Transaction p WHERE(p.account.id = :idAccount ) AND (p.account.office.id = :idOffice))")
+	Page<Transaction> findAll(String description, Long amountH, Long amountL,  Long officeId, Long accountId, Pageable pageable);
 	
 	
-	@Query("SELECT AVG(p.amount) FROM Transaction p WHERE(p.account.id = :idAccount ) AND (p.account.office.id = :idOffice))")
-	Double findAvg(@Param("idOffice") Long officeId,@Param("idAccount") Long accountId);
+//	@Query("SELECT AVG(p.amount) FROM Transaction p WHERE(p.account.id = :idAccount ) AND (p.account.office.id = :idOffice))")
+//	Double findAvg(@Param("idOffice") Long officeId,@Param("idAccount") Long accountId);
+
+
+	Double findAvg(String description, Long amountH, Long amountL, Long officeId, Long accountId);
 }
 
 

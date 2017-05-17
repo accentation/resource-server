@@ -7,7 +7,7 @@ import com.accenture.banking.model.Account;
 import com.accenture.banking.model.Transaction;
 
 public interface TransactionService {
-	Page<Transaction> findAll(Long officeId, Long accountId, Pageable pageable);
+	Page<Transaction> findAll(String description, Long amountH, Long amountL,  Long officeId, Long accountId, Pageable pageable);
 	
-	Double findAvg(Long officeId, Long accountId);
+	Double findAvg(String description, Long amountH, Long amountL, Long officeId, Long accountId);
 }
