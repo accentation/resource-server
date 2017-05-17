@@ -20,8 +20,13 @@ public class TransactionServiceImpl implements TransactionService{
 	private TransactionRepository transactionRepository;
 	
 	@Override
-	public Page<Transaction> find(Long officeId, Long accountId, Pageable pageable) {
+	public Page<Transaction> findAll(Long officeId, Long accountId, Pageable pageable) {
 		// TODO Auto-generated method stub		
-		return transactionRepository.find(officeId, accountId,pageable);		
+		return transactionRepository.findAll(officeId, accountId,pageable);		
+	}
+
+	@Override
+	public Double findAvg(Long officeId, Long accountId) {
+		return transactionRepository.findAvg(officeId, accountId);	
 	}
 }
