@@ -11,6 +11,8 @@ public interface AccountService {
 	
 	Account getAccountByIban(Long officeId, String iban);
 	Account getAccountById(Long officeId,Long id);
-	Page <Account> listAllByPage(Pageable pageable);
+//	Page <Account> findByOfficeId(long officeId, Pageable pageable);
+	Page<Account> listAllByOfficeId(long officeId, Pageable pageable);
+	
 
 }
