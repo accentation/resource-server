@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accenture.banking.model.Account;
 import com.accenture.banking.model.Client;
 import com.accenture.banking.model.Office;
 import com.accenture.banking.resource.builder.EntityToDtoBuilder;
+import com.accenture.banking.resource.dto.AccountDto;
 import com.accenture.banking.resource.dto.ClientDto;
 import com.accenture.banking.resource.dto.OfficeDto;
+import com.accenture.banking.service.AccountService;
 import com.accenture.banking.service.ClientService;
 
 @RestController
@@ -28,6 +31,9 @@ public class ClientController {
 
 	@Autowired
 	private ClientService clientService;
+
+	@Autowired
+	private AccountService accountService;
 
 	/**
 	 * This method returns all paged Clients
@@ -63,6 +69,22 @@ public class ClientController {
 		ClientDto dto = dtoBuilder.buildClientDto(client);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "{clientId}/accounts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	Page<AccountDto> listAccounts(@PathVariable("clientId") Long clientId, Pageable pageable) {
+		Page<Account> accounts = accountService.listAllByClientId(clientId, pageable);
+		Page<AccountDto> dtoPage = accounts.map(new Converter<Account, AccountDto>() {
+			@Override
+			public AccountDto convert(Account account) {
+
+				AccountDto dto = dtoBuilder.buildAccountDto(account);
+				return dto;
+			}
+
+		});
+		return dtoPage;
+	}
+
 	/*
 	 * @RequestMapping(value = "name/{clientName}", method = RequestMethod.GET,
 	 * produces = MediaType.APPLICATION_JSON_VALUE) public

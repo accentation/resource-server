@@ -1,13 +1,20 @@
 package com.accenture.banking.resource.builder;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 
 import com.accenture.banking.model.Account;
-import com.accenture.banking.model.Client;
 import com.accenture.banking.model.Office;
+import com.accenture.banking.model.Transaction;
 import com.accenture.banking.resource.dto.AccountDto;
+
+import com.accenture.banking.model.Client;
+
 import com.accenture.banking.resource.dto.ClientDto;
+
 import com.accenture.banking.resource.dto.OfficeDto;
+import com.accenture.banking.resource.dto.TransactionDto;
 
 @Component("entityToDtoBuilder")
 public class EntityToDtoBuilder {
@@ -51,5 +58,18 @@ public class EntityToDtoBuilder {
 		}
 		return dto;
 	}
-
+	
+	public TransactionDto buildOfficeDto(Transaction transaction) {
+		TransactionDto dto = null;
+		if (transaction != null) {
+			dto = new TransactionDto();	
+			dto.setId(transaction.getId());
+			dto.setAccountId(transaction.getAccount().getId());
+			dto.setDescription(transaction.getDescription());
+			dto.setDatetime(transaction.getDatetime());
+			dto.setType(transaction.getType());
+			dto.setAmount(transaction.getAmount());			
+		}
+		return dto;
+	}
 }

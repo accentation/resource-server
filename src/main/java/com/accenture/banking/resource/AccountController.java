@@ -51,8 +51,8 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	Page<AccountDto> list(Pageable pageable) {
-		Page<Account> accounts = accountService.listAllByPage(pageable);
+	Page<AccountDto> list(Pageable pageable,@PathVariable("officeId") Long officeId) {
+		Page<Account> accounts = accountService.listAllByOfficeId(officeId,pageable);
 		Page<AccountDto> dtoPage = accounts.map(new Converter<Account, AccountDto>() {
 			public AccountDto convert(Account account) {
 
